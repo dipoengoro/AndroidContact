@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Contact</string>
+    <string name="save">Save</string>
+    <string name="phone_number">Phone number</string>
+    <string name="name">Name</string>
+    <string name="delete_image">Delete image</string>
+    <string name="chat_image">Chat image</string>
+    <string name="example_name">Dipo</string>
+    <string name="update">Update</string>
+    <string name="example_number">082145888256</string>
+</resources>
