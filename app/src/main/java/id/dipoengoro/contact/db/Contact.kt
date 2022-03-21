@@ -3,6 +3,7 @@ package id.dipoengoro.contact.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "contact_data_table")
 data class Contact(
@@ -15,4 +16,4 @@ data class Contact(
     var phone: String,
     @ColumnInfo(name = "contact_phone_w_region")
     var phoneWRegion: String
-)
+) : Serializable

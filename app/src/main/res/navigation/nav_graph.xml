@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="id.dipoengoro.contact.fragment.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="Contact"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_addEditFragment"
             app:destination="@id/addEditFragment" />
@@ -17,6 +17,16 @@
     <fragment
         android:id="@+id/addEditFragment"
         android:name="id.dipoengoro.contact.fragment.AddEditFragment"
-        android:label="fragment_add_edit"
-        tools:layout="@layout/fragment_add_edit" />
+        android:label="{label}"
+        tools:layout="@layout/fragment_add_edit" >
+        <argument
+            android:name="label"
+            app:argType="string"
+            android:defaultValue="Add Contact" />
+        <argument
+            android:name="contact"
+            app:argType="id.dipoengoro.contact.db.Contact"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>
