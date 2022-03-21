@@ -1,5 +1,7 @@
 package id.dipoengoro.contact.fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.dipoengoro.contact.adapter.RecyclerAdapter
 import id.dipoengoro.contact.databinding.FragmentHomeBinding
+import id.dipoengoro.contact.db.Contact
 import id.dipoengoro.contact.db.ContactDatabase
 import id.dipoengoro.contact.repository.ContactRepository
 import id.dipoengoro.contact.viewmodel.ContactViewModel
@@ -36,10 +39,10 @@ class HomeFragment : Fragment() {
                     contact = contact
                 )
             )
-        }, { _, _ ->
-
+        }, { contact, _ ->
+            viewModel.deleteContact(contact)
         }, {
-
+            intentChat(it)
         })
         binding.apply {
             recycler.layoutManager = LinearLayoutManager(requireActivity())
@@ -55,5 +58,27 @@ class HomeFragment : Fragment() {
             }
         }
         return binding.root
+    }
+
+    private fun intentChat(contact: Contact) {
+        val phone = contact.phoneWRegion.replaceFirstChar { "" }
+        try {
+            customIntent("whatsapp://send?phone=$phone")
+        } catch (e: Exception) {
+            e.printStackTrace()
+            val appPackageName = "com.whatsapp"
+            try {
+                customIntent("market://details?id=$appPackageName")
+            } catch (e: android.content.ActivityNotFoundException) {
+                customIntent("https://play.google.com/store/apps/details?id=$appPackageName")
+            }
+        }
+    }
+
+    private fun customIntent(uriString: String) {
+        startActivity(
+            Intent(Intent.ACTION_VIEW,
+            Uri.parse(uriString))
+        )
     }
 }
