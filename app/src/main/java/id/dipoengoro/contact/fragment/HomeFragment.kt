@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.dipoengoro.contact.adapter.RecyclerAdapter
 import id.dipoengoro.contact.databinding.FragmentHomeBinding
@@ -42,12 +43,12 @@ class HomeFragment : Fragment() {
                 adapter.setList(it)
                 adapter.notifyDataSetChanged()
             }
+            fabAdd.setOnClickListener {
+                it.findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToAddEditFragment()
+                )
+            }
         }
-//        binding.homeText.setOnClickListener {
-//            it.findNavController().navigate(
-//                HomeFragmentDirections.actionHomeFragmentToAddEditFragment("Edit Contact")
-//            )
-//        }
         return binding.root
     }
 }
