@@ -29,8 +29,13 @@ class HomeFragment : Fragment() {
         val repository = ContactRepository(ContactDatabase.getInstance(requireContext()))
         val factory = ContactViewModelFactory(repository)
         viewModel = ViewModelProvider(requireActivity(), factory)[ContactViewModel::class.java]
-        adapter = RecyclerAdapter({ _, _ ->
-
+        adapter = RecyclerAdapter({ contact, _ ->
+            view?.findNavController()?.navigate(
+                HomeFragmentDirections.actionHomeFragmentToAddEditFragment(
+                    label = "Edit Contact",
+                    contact = contact
+                )
+            )
         }, { _, _ ->
 
         }, {
