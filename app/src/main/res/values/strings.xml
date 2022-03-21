@@ -8,4 +8,6 @@
     <string name="example_name">Dipo</string>
     <string name="update">Update</string>
     <string name="example_number">082145888256</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
