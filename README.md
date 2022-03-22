@@ -1,4 +1,4 @@
 # AndroidContact
 Android Contact
 # App Demo
-![](https://github.com/dipoengoro/AndroidContact/blob/main/assets/demo.gif)
+<img src="https://github.com/dipoengoro/AndroidContact/blob/main/assets/demo.gif" width="250" height="250"/>
