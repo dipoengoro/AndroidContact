@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kontak</string>
+    <string name="save">Simpan</string>
+    <string name="phone_number">Nomor telepon</string>
+    <string name="name">Nama</string>
+    <string name="delete_image">Gambar hapus</string>
+    <string name="chat_image">Gambar obrolan</string>
+    <string name="example_name">Dipo</string>
+    <string name="update">Perbarui</string>
+    <string name="example_number">082145888256</string>
+    <string name="hello_blank_fragment">Halo fragment kosong</string>
+    <string name="button_add_contact">Tombol tambah kontak</string>
+    <string name="edit_fragment">Sunting Kontak</string>
+    <string name="add_fragment">Tambah Kontak</string>
+</resources>

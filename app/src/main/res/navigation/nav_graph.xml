@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="id.dipoengoro.contact.fragment.HomeFragment"
-        android:label="Contact"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_addEditFragment"
@@ -21,8 +21,7 @@
         tools:layout="@layout/fragment_add_edit" >
         <argument
             android:name="label"
-            app:argType="string"
-            android:defaultValue="Add Contact" />
+            app:argType="string" />
         <argument
             android:name="contact"
             app:argType="id.dipoengoro.contact.db.Contact"

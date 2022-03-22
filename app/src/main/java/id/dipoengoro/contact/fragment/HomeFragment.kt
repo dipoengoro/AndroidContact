@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.dipoengoro.contact.R
 import id.dipoengoro.contact.adapter.RecyclerAdapter
 import id.dipoengoro.contact.databinding.FragmentHomeBinding
 import id.dipoengoro.contact.db.Contact
@@ -35,7 +36,7 @@ class HomeFragment : Fragment() {
         adapter = RecyclerAdapter({ contact, _ ->
             view?.findNavController()?.navigate(
                 HomeFragmentDirections.actionHomeFragmentToAddEditFragment(
-                    label = "Edit Contact",
+                    label = getString(R.string.edit_fragment),
                     contact = contact
                 )
             )
@@ -53,7 +54,9 @@ class HomeFragment : Fragment() {
             }
             fabAdd.setOnClickListener {
                 it.findNavController().navigate(
-                    HomeFragmentDirections.actionHomeFragmentToAddEditFragment()
+                    HomeFragmentDirections.actionHomeFragmentToAddEditFragment(
+                        label = getString(R.string.add_fragment)
+                    )
                 )
             }
         }
