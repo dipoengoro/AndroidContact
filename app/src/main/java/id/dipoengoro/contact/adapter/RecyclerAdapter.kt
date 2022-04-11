@@ -10,7 +10,7 @@ class RecyclerAdapter(
     private val onItemClicked: (Contact, position: Int) -> Unit,
     private val onDeleteClicked: (Contact, position: Int) -> Unit,
     private val onChatClicked: (Contact) -> Unit
-) : RecyclerView.Adapter<ViewHolder>() {
+) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     private val contactList = ArrayList<Contact>()
 
@@ -35,26 +35,26 @@ class RecyclerAdapter(
         contactList.clear()
         contactList.addAll(contacts)
     }
-}
 
-class ViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(
-        contact: Contact,
-        onItemClicked: (Contact) -> Unit,
-        onDeleteClicked: (Contact) -> Unit,
-        onChatClicked: (Contact) -> Unit
-    ) {
-        binding.apply {
-            textName.text = contact.name
-            textNumber.text = contact.phone
-            this.root.setOnClickListener {
-                onItemClicked(contact)
-            }
-            iconDelete.setOnClickListener {
-                onDeleteClicked(contact)
-            }
-            iconWhatsApp.setOnClickListener {
-                onChatClicked(contact)
+    inner class ViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(
+            contact: Contact,
+            onItemClicked: (Contact) -> Unit,
+            onDeleteClicked: (Contact) -> Unit,
+            onChatClicked: (Contact) -> Unit
+        ) {
+            binding.apply {
+                textName.text = contact.name
+                textNumber.text = contact.phone
+                this.root.setOnClickListener {
+                    onItemClicked(contact)
+                }
+                iconDelete.setOnClickListener {
+                    onDeleteClicked(contact)
+                }
+                iconWhatsApp.setOnClickListener {
+                    onChatClicked(contact)
+                }
             }
         }
     }
