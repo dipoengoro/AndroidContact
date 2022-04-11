@@ -30,20 +30,22 @@ class AddEditFragment : Fragment() {
         binding = FragmentAddEditBinding.inflate(inflater, container, false)
         val repository = ContactRepository(ContactDatabase.getInstance(requireContext()))
         val factory = ContactViewModelFactory(repository)
-        viewModel = ViewModelProvider(requireActivity(), factory)[ContactViewModel::class.java]
+        viewModel = ViewModelProvider(this, factory)[ContactViewModel::class.java]
         binding.apply {
-            if (args.contact != null) {
-                val contact = args.contact!!
-                selectedContact = contact.id
-                editName.setText(contact.name)
-                editNumber.setText(contact.phone)
-                buttonSave.text = getString(R.string.update)
-                buttonSave.setOnClickListener {
-                    editContact()
-                }
-            } else {
-                buttonSave.setOnClickListener {
+            when (args.contact) {
+                null -> buttonSave.setOnClickListener {
                     addContact()
+                }
+                else -> args.contact?.let {
+                    it.apply {
+                        selectedContact = id
+                        editName.setText(name)
+                        editNumber.setText(phone)
+                    }
+                    buttonSave.text = getString(R.string.update)
+                    buttonSave.setOnClickListener {
+                        editContact()
+                    }
                 }
             }
         }
@@ -63,36 +65,33 @@ class AddEditFragment : Fragment() {
         }
     }
 
-    private fun addContact() {
-        val contact = getContactEdit()
-        val name = contact.name
-        val phone = contact.phone
+    private fun addContact() = getContactEdit().apply {
         if (name == "" && phone == "") {
-            Toast.makeText(requireContext(), "Please fill all blank form", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Please fill all blank form", Toast.LENGTH_SHORT)
+                .show()
         } else if (name == "") {
             Toast.makeText(requireContext(), "Please fill name form", Toast.LENGTH_SHORT).show()
         } else if (phone == "") {
-            Toast.makeText(requireContext(), "Please fill phone form", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Please fill phone form", Toast.LENGTH_SHORT)
+                .show()
         } else {
-            viewModel.addContact(contact)
+            viewModel.addContact(this)
             requireActivity().onBackPressed()
         }
     }
 
-    private fun editContact() {
-        val contact = getContactEdit(selectedContact)
-        val name = contact.name
-        val phone = contact.phone
+    private fun editContact() = getContactEdit(selectedContact).apply {
         if (name == "" && phone == "") {
-            Toast.makeText(requireContext(), "Please fill all blank form", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Please fill all blank form", Toast.LENGTH_SHORT)
+                .show()
         } else if (name == "") {
             Toast.makeText(requireContext(), "Please fill name form", Toast.LENGTH_SHORT).show()
         } else if (phone == "") {
-            Toast.makeText(requireContext(), "Please fill phone form", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Please fill phone form", Toast.LENGTH_SHORT)
+                .show()
         } else {
-            viewModel.updateContact(contact)
+            viewModel.updateContact(this)
             requireActivity().onBackPressed()
         }
     }
-
 }
