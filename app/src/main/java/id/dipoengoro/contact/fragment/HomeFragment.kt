@@ -78,10 +78,11 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun customIntent(uriString: String) {
+    private fun customIntent(uriString: String) =
         startActivity(
-            Intent(Intent.ACTION_VIEW,
-            Uri.parse(uriString))
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(uriString)
+            )
         )
-    }
 }
