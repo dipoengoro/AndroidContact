@@ -34,10 +34,12 @@ android {
                 "-Xjvm-default=all",
         ]
     }
-
     packagingOptions {
-        exclude 'META-INF/atomicfu.kotlin_module'
+        resources {
+            excludes += ['META-INF/atomicfu.kotlin_module']
+        }
     }
+
 
     buildFeatures {
         viewBinding true
