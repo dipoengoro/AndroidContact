@@ -11,14 +11,13 @@ import id.dipoengoro.contact.R
 import id.dipoengoro.contact.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val hostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        navController = hostFragment.navController
+        navController = (supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
+                as NavHostFragment).navController
         NavigationUI.setupActionBarWithNavController(
             this@MainActivity,
             navController,
@@ -26,11 +25,12 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            onBackPressed()
-            return true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        when (item.itemId) {
+            android.R.id.home -> {
+                navController.navigateUp()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        return true
-    }
 }
