@@ -16,15 +16,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/list_item" />
 
-<!--    <com.google.android.material.button.MaterialButton-->
-<!--        android:id="@+id/button_add"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/add_fragment"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="@id/guideline_8"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/guideline_2" />-->
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_8"
         android:layout_width="wrap_content"
@@ -45,9 +36,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/large_margin"
         android:clickable="true"
+        android:padding="0dp"
         android:contentDescription="@string/button_add_contact"
         android:focusable="true"
-        android:src="@drawable/ic_add"
+        app:maxImageSize="64dp"
+        app:fabCustomSize="56dp"
+        android:src="@drawable/plus_circle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
