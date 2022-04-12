@@ -1,14 +1,15 @@
 package id.dipoengoro.contact.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import id.dipoengoro.contact.databinding.ListItemBinding
 import id.dipoengoro.contact.db.Contact
 
 class RecyclerAdapter(
-    private val onItemClicked: (Contact, position: Int) -> Unit,
-    private val onDeleteClicked: (Contact, position: Int) -> Unit,
+    private val onItemClicked: (Contact, view: View) -> Unit,
+    private val onDeleteClicked: (Contact) -> Unit,
     private val onChatClicked: (Contact) -> Unit
 ) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
@@ -24,8 +25,8 @@ class RecyclerAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         holder.bind(
             contactList[position],
-            { onItemClicked(it, position) },
-            { onDeleteClicked(it, position) },
+            { onItemClicked(it, holder.view) },
+            { onDeleteClicked(it) },
             { onChatClicked(it) }
         )
 
@@ -37,6 +38,7 @@ class RecyclerAdapter(
     }
 
     inner class ViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        val view = binding.root
         fun bind(
             contact: Contact,
             onItemClicked: (Contact) -> Unit,

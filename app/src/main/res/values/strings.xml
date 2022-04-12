@@ -12,4 +12,7 @@
     <string name="button_add_contact">Button add contact</string>
     <string name="edit_fragment">Edit Contact</string>
     <string name="add_fragment">Add Contact</string>
+    <string name="all_blank">Please fill all blank form</string>
+    <string name="name_blank">Please fill name form</string>
+    <string name="phone_blank">Please fill phone form</string>
 </resources>

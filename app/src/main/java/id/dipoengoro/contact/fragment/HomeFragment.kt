@@ -22,36 +22,37 @@ import kotlinx.coroutines.InternalCoroutinesApi
 
 @InternalCoroutinesApi
 class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: ContactViewModel
-    private lateinit var adapter: RecyclerAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val repository = ContactRepository(ContactDatabase.getInstance(requireContext()))
-        val factory = ContactViewModelFactory(repository)
-        viewModel = ViewModelProvider(requireActivity(), factory)[ContactViewModel::class.java]
-        adapter = RecyclerAdapter({ contact, _ ->
-            view?.findNavController()?.navigate(
+        val binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val viewModel = ViewModelProvider(this,
+            // factory
+            ContactViewModelFactory(
+                // repository
+                ContactRepository(
+                    ContactDatabase.getInstance(requireContext())
+                )
+            )
+        )[ContactViewModel::class.java]
+        val adapter = RecyclerAdapter({ contact, view ->
+            view.findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToAddEditFragment(
                     label = getString(R.string.edit_fragment),
                     contact = contact
                 )
             )
-        }, { contact, _ ->
-            viewModel.deleteContact(contact)
-        }, {
-            intentChat(it)
-        })
+        }, { viewModel.deleteContact(it) }, { intentChat(it) })
+
+        viewModel.getAllContacts().observe(viewLifecycleOwner) {
+            adapter.setList(it)
+            adapter.notifyDataSetChanged()
+        }
         binding.apply {
-            recycler.layoutManager = LinearLayoutManager(requireActivity())
+            recycler.layoutManager = LinearLayoutManager(requireContext())
             recycler.adapter = adapter
-            viewModel.getAllContacts().observe(requireActivity()) {
-                adapter.setList(it)
-                adapter.notifyDataSetChanged()
-            }
             fabAdd.setOnClickListener {
                 it.findNavController().navigate(
                     HomeFragmentDirections.actionHomeFragmentToAddEditFragment(
@@ -63,17 +64,17 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    private fun intentChat(contact: Contact) {
-        val phone = contact.phoneWRegion.replaceFirstChar { "" }
+    private fun intentChat(contact: Contact) = contact.phoneWRegion.replaceFirstChar { "" }.apply {
         try {
-            customIntent("whatsapp://send?phone=$phone")
+            customIntent("whatsapp://send?phone=$this")
         } catch (e: Exception) {
             e.printStackTrace()
-            val appPackageName = "com.whatsapp"
-            try {
-                customIntent("market://details?id=$appPackageName")
-            } catch (e: android.content.ActivityNotFoundException) {
-                customIntent("https://play.google.com/store/apps/details?id=$appPackageName")
+            "com.whatsapp".apply {
+                try {
+                    customIntent("market://details?id=$this@apply")
+                } catch (e: android.content.ActivityNotFoundException) {
+                    customIntent("https://play.google.com/store/apps/details?id=$this@apply")
+                }
             }
         }
     }

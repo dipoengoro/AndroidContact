@@ -34,7 +34,7 @@ class AddEditFragment : Fragment() {
         binding.apply {
             when (args.contact) {
                 null -> buttonSave.setOnClickListener {
-                    addContact()
+                    validated()
                 }
                 else -> args.contact?.let {
                     it.apply {
@@ -44,7 +44,7 @@ class AddEditFragment : Fragment() {
                     }
                     buttonSave.text = getString(R.string.update)
                     buttonSave.setOnClickListener {
-                        editContact()
+                        validated()
                     }
                 }
             }
@@ -65,33 +65,23 @@ class AddEditFragment : Fragment() {
         }
     }
 
-    private fun addContact() = getContactEdit().apply {
+    private fun validated() = getContactEdit(selectedContact).apply {
         if (name == "" && phone == "") {
-            Toast.makeText(requireContext(), "Please fill all blank form", Toast.LENGTH_SHORT)
-                .show()
+            toasting(getString(R.string.all_blank))
         } else if (name == "") {
-            Toast.makeText(requireContext(), "Please fill name form", Toast.LENGTH_SHORT).show()
+            toasting(getString(R.string.name_blank))
         } else if (phone == "") {
-            Toast.makeText(requireContext(), "Please fill phone form", Toast.LENGTH_SHORT)
-                .show()
+            toasting(getString(R.string.phone_blank))
         } else {
-            viewModel.addContact(this)
+            if (this.id == 0) {
+                viewModel.addContact(this)
+            } else {
+                viewModel.updateContact(this)
+            }
             requireActivity().onBackPressed()
         }
     }
 
-    private fun editContact() = getContactEdit(selectedContact).apply {
-        if (name == "" && phone == "") {
-            Toast.makeText(requireContext(), "Please fill all blank form", Toast.LENGTH_SHORT)
-                .show()
-        } else if (name == "") {
-            Toast.makeText(requireContext(), "Please fill name form", Toast.LENGTH_SHORT).show()
-        } else if (phone == "") {
-            Toast.makeText(requireContext(), "Please fill phone form", Toast.LENGTH_SHORT)
-                .show()
-        } else {
-            viewModel.updateContact(this)
-            requireActivity().onBackPressed()
-        }
-    }
+    private fun toasting(message: String) =
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 }
