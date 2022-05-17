@@ -1,69 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/small_margin"
-    android:layout_marginTop="@dimen/extra_small_margin"
-    android:layout_marginEnd="@dimen/small_margin"
-    android:layout_marginBottom="@dimen/extra_small_margin"
-    android:background="@color/item_background">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/textName"
-        android:layout_width="@dimen/match_constraint"
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/medium_margin"
-        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_marginTop="@dimen/extra_small_margin"
         android:layout_marginEnd="@dimen/small_margin"
-        android:paddingStart="@dimen/small_margin"
-        android:paddingEnd="@dimen/small_margin"
-        android:textSize="@dimen/text_name_size"
-        android:maxLines="1"
-        app:layout_constraintEnd_toStartOf="@+id/iconWhatsApp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/example_name" />
+        android:layout_marginBottom="@dimen/extra_small_margin"
+        android:padding="@dimen/normal_margin">
 
-    <TextView
-        android:id="@+id/textNumber"
-        android:layout_width="@dimen/match_constraint"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/medium_margin"
-        android:layout_marginTop="@dimen/small_margin"
-        android:layout_marginEnd="@dimen/small_margin"
-        android:layout_marginBottom="@dimen/small_margin"
-        android:paddingStart="@dimen/small_margin"
-        android:paddingEnd="@dimen/small_margin"
-        android:textSize="@dimen/text_number_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/iconWhatsApp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textName"
-        tools:text="@string/example_number"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/iconDelete"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:layout_margin="@dimen/small_margin"
-        android:contentDescription="@string/delete_image"
-        android:padding="@dimen/extra_small_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_delete" />
+            <TextView
+                android:id="@+id/textName"
+                android:layout_width="@dimen/match_constraint"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:textSize="@dimen/text_name_size"
+                app:layout_constraintBottom_toTopOf="@id/textNumber"
+                app:layout_constraintEnd_toStartOf="@+id/iconWhatsApp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="@string/example_name" />
 
-    <ImageView
-        android:id="@+id/iconWhatsApp"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:layout_margin="@dimen/small_margin"
-        android:contentDescription="@string/chat_image"
-        android:padding="@dimen/extra_small_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/iconDelete"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_chat" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textNumber"
+                android:layout_width="@dimen/match_constraint"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/text_number_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iconWhatsApp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textName"
+                tools:text="@string/example_number" />
+
+            <ImageView
+                android:id="@+id/iconDelete"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/small_margin"
+                android:contentDescription="@string/delete_image"
+                android:padding="@dimen/normal_margin"
+                app:layout_constraintBottom_toBottomOf="@id/textNumber"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textName"
+                app:srcCompat="@drawable/trash" />
+
+            <ImageView
+                android:id="@+id/iconWhatsApp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/small_margin"
+                android:contentDescription="@string/chat_image"
+                android:padding="@dimen/normal_margin"
+                app:layout_constraintBottom_toBottomOf="@id/textNumber"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@+id/iconDelete"
+                app:layout_constraintTop_toTopOf="@id/textName"
+                app:srcCompat="@drawable/chat" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
