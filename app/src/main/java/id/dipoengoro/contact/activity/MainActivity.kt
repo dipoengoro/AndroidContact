@@ -25,12 +25,11 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean =
-        when (item.itemId) {
-            android.R.id.home -> {
-                navController.navigateUp()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        android.R.id.home -> {
+            navController.navigateUp()
+            true
         }
+        else -> super.onOptionsItemSelected(item)
+    }
 }
